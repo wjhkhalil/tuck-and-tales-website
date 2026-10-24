@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tuck &amp; Tales – Bedtime Stories App for Kids | Free, No Ads</title>
+    <meta
+      name="description"
+      content="Tuck & Tales is a free bedtime story app for kids on Android: 21 illustrated stories about friendship, patience and animals, with a night reading mode. No ads, no sign-up."
+    />
+    <meta name="keywords" content="bedtime stories, kids stories app, children's story book, short moral stories, stories for toddlers, bedtime story app android" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="%SITE_URL%" />
+    <meta name="theme-color" content="#FF9D19" />
+    <meta name="application-name" content="Tuck &amp; Tales" />
+    <meta name="google-play-app" content="app-id=com.tuckandtales.app" />
+
+    <!-- Social share cards -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Tuck &amp; Tales" />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:url" content="%SITE_URL%" />
+    <meta property="og:title" content="Tuck &amp; Tales – Cosy Bedtime Stories for Kids" />
+    <meta property="og:description" content="Gentle illustrated stories about friendship, sharing and sleepy bedtimes. Free on Google Play, with no ads and no sign-up." />
+    <meta property="og:image" content="%SITE_URL%og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Tuck &amp; Tales app showing a bunny and a carrot story" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Tuck &amp; Tales – Cosy Bedtime Stories for Kids" />
+    <meta name="twitter:description" content="Gentle illustrated stories about friendship, sharing and sleepy bedtimes. No ads, no sign-up." />
+    <meta name="twitter:image" content="%SITE_URL%og-image.jpg" />
+
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="preload" as="image" href="/screens/01-home.webp" type="image/webp" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "%SITE_URL%#website",
+            "url": "%SITE_URL%",
+            "name": "Tuck & Tales",
+            "inLanguage": "en"
+          },
+          {
+            "@type": "Organization",
+            "@id": "%SITE_URL%#org",
+            "name": "Tuck & Tales",
+            "url": "%SITE_URL%",
+            "logo": "%SITE_URL%icon-512.png",
+            "email": "heyitswajeeha@gmail.com"
+          },
+          {
+            "@type": "MobileApplication",
+            "name": "Tuck & Tales",
+            "description": "A cosy bedtime story app for kids with 21 illustrated stories about friendship, patience, animals and adventure, plus a soft night reading mode.",
+            "operatingSystem": "Android",
+            "applicationCategory": "EducationalApplication",
+            "applicationSubCategory": "Children's books",
+            "url": "https://play.google.com/store/apps/details?id=com.tuckandtales.app",
+            "installUrl": "https://play.google.com/store/apps/details?id=com.tuckandtales.app",
+            "image": "%SITE_URL%icon-512.png",
+            "screenshot": [
+              "%SITE_URL%screens/01-home.webp",
+              "%SITE_URL%screens/02-story-library.webp",
+              "%SITE_URL%screens/03-read-story.webp",
+              "%SITE_URL%screens/06-bedtime-reading.webp"
+            ],
+            "audience": { "@type": "PeopleAudience", "audienceType": "Children and parents" },
+            "isFamilyFriendly": true,
+            "inLanguage": "en",
+            "publisher": { "@id": "%SITE_URL%#org" },
+            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+          }
+        ]
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Sky: fixed backdrop that fades from sunset to night as you scroll -->
+    <div class="sky" aria-hidden="true">
+      <div class="sky__day"></div>
+      <div class="sky__night"></div>
+      <div class="sky__sun"></div>
+      <div class="sky__stars" id="stars"></div>
+      <div class="sky__clouds" id="clouds"></div>
+    </div>
+    <div class="shooting-star" id="shooting-star" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <a class="brand" href="#top">
+        <img src="/icon.webp" alt="" width="44" height="44" />
+        <span>Tuck &amp; Tales</span>
+      </a>
+      <nav class="topbar__links" aria-label="Sections">
+        <a href="#how">How it works</a>
+        <a href="#shelf">Stories</a>
+        <a href="#grown-ups">Grown-ups</a>
+      </nav>
+      <button class="lamp" id="lamp" type="button" aria-pressed="false" aria-label="Night light">
+        <svg viewBox="0 0 48 48" aria-hidden="true">
+          <path class="lamp__glow" d="M10 26 L38 26 L46 46 L2 46 Z" />
+          <path class="lamp__shade" d="M14 6 H34 L40 24 H8 Z" />
+          <rect class="lamp__stem" x="22" y="24" width="4" height="14" rx="2" />
+          <rect class="lamp__base" x="14" y="38" width="20" height="5" rx="2.5" />
+          <line class="lamp__cord" x1="34" y1="24" x2="34" y2="31" />
+          <circle class="lamp__pull" cx="34" cy="33" r="2.4" />
+        </svg>
+        <span class="lamp__label">Night light</span>
+      </button>
+    </header>
+
+    <main id="top">
+      <!-- ============ HERO ============ -->
+      <section class="hero">
+        <div class="hero__text">
+          <p class="eyebrow">A cosy bedtime story app for little ones</p>
+          <h1 class="title">
+            <span class="title__word">Tuck</span>
+            <span class="title__amp">
+              &amp;
+              <button class="moon" id="moon" type="button" aria-label="Sleepy moon">
+                <span class="moon__string"></span>
+                <svg class="moon__svg" viewBox="0 0 64 64" aria-hidden="true">
+                  <path class="moon__body" d="M40 6a26 26 0 1 0 18 44A22 22 0 0 1 40 6Z" />
+                  <circle class="moon__cheek" cx="24" cy="42" r="3.5" />
+                  <path class="moon__eye moon__eye--open" d="M18 31q3 3 6 0" />
+                  <path class="moon__eye moon__eye--wink" d="M17 30l7 2-7 2" />
+                  <path class="moon__smile" d="M22 46q5 4 10 0" />
+                </svg>
+              </button>
+            </span>
+            <span class="title__word">Tales</span>
+          </h1>
+          <p class="hero__lead">
+            Gentle little stories about friendship, sharing, patience and sleepy bedtimes,
+            with bright pictures and a soft night-time reading mode.
+          </p>
+          <div class="hero__cta">
+            <a class="btn btn--play jelly" href="https://play.google.com/store/apps/details?id=com.tuckandtales.app" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 2.8v18.4c0 .5.6.8 1 .5l15.5-9.2c.4-.3.4-.8 0-1.1L5 2.3c-.4-.3-1 0-1 .5Z" /></svg>
+              <span><small>Get it on</small> Google Play</span>
+            </a>
+            <a class="btn btn--ghost jelly" href="#shelf">Peek at the stories</a>
+          </div>
+          <ul class="hero__badges">
+            <li>🌟 21 stories</li>
+            <li>🚫 No ads</li>
+            <li>🔒 No sign-up</li>
+          </ul>
+        </div>
+
+        <div class="book-wrap">
+          <div class="book" id="book">
+            <div class="book__page book__page--left">
+              <img id="book-left" src="/screens/01-home.webp" alt="Tuck & Tales home screen" width="540" height="960" />
+            </div>
+            <div class="book__page book__page--right">
+              <img id="book-right" src="/screens/03-read-story.webp" alt="Reading The Little Bunny and the Carrot" width="540" height="960" />
+            </div>
+            <div class="leaf" id="leaf" aria-hidden="true">
+              <div class="book__page book__page--right leaf__face leaf__face--front"><img id="leaf-front" alt="" width="540" height="960" /></div>
+              <div class="book__page book__page--left leaf__face leaf__face--back"><img id="leaf-back" alt="" width="540" height="960" /></div>
+            </div>
+            <div class="book__cover" aria-hidden="true">
+              <div class="book__cover-front">
+                <img src="/icon.webp" alt="" width="256" height="256" />
+                <span>Tuck &amp; Tales</span>
+              </div>
+              <div class="book__cover-back"></div>
+            </div>
+          </div>
+          <button class="book__flip jelly" id="book-flip" type="button">Turn the page ✨</button>
+        </div>
+      </section>
+
+      <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 40 C 180 0 360 80 540 40 S 900 0 1080 40 S 1300 80 1440 40 V80 H0 Z" />
+      </svg>
+
+      <!-- ============ HOW IT WORKS ============ -->
+      <section class="paper" id="how">
+        <h2 class="section-title">How it works</h2>
+        <p class="section-sub">A tiny bedtime routine in three steps</p>
+        <ol class="steps">
+          <li class="sticker sticker--peach">
+            <span class="sticker__num">1</span>
+            <span class="sticker__icon">🛁</span>
+            <h3>Get cosy</h3>
+            <p>Teeth brushed, pyjamas on, favourite teddy found.</p>
+          </li>
+          <li class="sticker sticker--sky">
+            <span class="sticker__num">2</span>
+            <span class="sticker__icon">📖</span>
+            <h3>Pick a tale</h3>
+            <p>Browse by Friendship, Animals, Adventure, Patience or Bedtime.</p>
+          </li>
+          <li class="sticker sticker--lilac">
+            <span class="sticker__num">3</span>
+            <span class="sticker__icon">🌙</span>
+            <h3>Drift off</h3>
+            <p>Switch on bedtime mode for soft, dark pages that are easy on sleepy eyes.</p>
+          </li>
+        </ol>
+      </section>
+
+      <!-- ============ STORY LIBRARY (looks like the app's Stories screen) ============ -->
+      <section class="paper paper--library" id="shelf">
+        <h2 class="section-title">The story library</h2>
+        <p class="section-sub">Pick a book off the shelf for a peek inside</p>
+        <div class="library__tools">
+          <label class="search">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" /><path d="m15.5 15.5 5 5" /></svg>
+            <span class="visually-hidden">Search stories</span>
+            <input id="story-search" type="search" placeholder="Search stories..." autocomplete="off" />
+          </label>
+          <div class="chips" id="chips" role="group" aria-label="Filter stories"></div>
+        </div>
+        <div class="bookcase" id="bookcase"></div>
+        <a class="sp-btn more-stories" id="more-stories" href="https://play.google.com/store/apps/details?id=com.tuckandtales.app" target="_blank" rel="noopener" hidden></a>
+        <p class="story-empty" id="story-empty" hidden>No stories found. Try another word! 🐾</p>
+      </section>
+
+      <!-- Story preview: an open storybook with the first few pages of the tale -->
+      <dialog class="story-modal" id="story-modal" aria-labelledby="sbook-title">
+        <h2 class="visually-hidden" id="sbook-title"></h2>
+        <button class="story-modal__close" id="modal-close" type="button" aria-label="Close">×</button>
+        <div class="sbook" id="sbook">
+          <div class="sbook__page sbook__page--left" id="sbook-left"></div>
+          <div class="sbook__page sbook__page--right" id="sbook-right"></div>
+          <div class="sbook__leaf" id="sbook-leaf" aria-hidden="true">
+            <div class="sbook__page sbook__page--right sbook__face sbook__face--front"></div>
+            <div class="sbook__page sbook__page--left sbook__face sbook__face--back"></div>
+          </div>
+        </div>
+        <div class="sbook__controls">
+          <button class="round-btn jelly" id="sbook-prev" type="button" aria-label="Previous page">←</button>
+          <span class="sbook__count" id="sbook-count" aria-live="polite"></span>
+          <button class="round-btn jelly" id="sbook-next" type="button" aria-label="Next page">→</button>
+        </div>
+      </dialog>
+
+      <!-- ============ GROWN-UPS ============ -->
+      <section class="paper paper--calm" id="grown-ups">
+        <h2 class="section-title">For grown-ups</h2>
+        <p class="section-sub">Made to be a calm, safe corner of the screen</p>
+        <ul class="facts">
+          <li><span>🚫</span><div><h3>No ads, ever</h3><p>No adverts and no in-app purchases. Nothing to tap by accident.</p></div></li>
+          <li><span>🔒</span><div><h3>No personal data</h3><p>No accounts, no sign-up, no analytics or tracking. Favourites stay on your device.</p></div></li>
+          <li><span>📶</span><div><h3>Reads offline</h3><p>Pictures are saved after their first load, so stories keep working without Wi-Fi.</p></div></li>
+          <li><span>🌙</span><div><h3>Bedtime mode</h3><p>A dark reading view with soft colours for the last story of the night.</p></div></li>
+          <li><span>💛</span><div><h3>Kind little lessons</h3><p>Every tale gently explores sharing, saying thank you, trying again or being patient.</p></div></li>
+          <li><span>✋</span><div><h3>Hand-picked stories</h3><p>No chat, no user content, no links out. Just stories we chose with care.</p></div></li>
+        </ul>
+        <a class="link-pill jelly" href="./privacy-policy.html">Read our privacy policy →</a>
+      </section>
+
+      <!-- ============ SCREENSHOTS ============ -->
+      <section class="paper paper--photos" id="peek-inside">
+        <h2 class="section-title">Peek inside the app</h2>
+        <p class="section-sub">Snapshots straight from Tuck &amp; Tales</p>
+        <div class="polaroids" id="polaroids" tabindex="0" aria-label="App screenshots"></div>
+        <div class="polaroid-nav">
+          <button class="round-btn jelly" id="pol-prev" type="button" aria-label="Previous screenshot">←</button>
+          <button class="round-btn jelly" id="pol-next" type="button" aria-label="Next screenshot">→</button>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============ FOOTER: sleeping scene ============ -->
+    <footer class="footer" id="footer">
+      <svg class="scene" viewBox="0 0 1440 360" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+        <g class="scene__moon">
+          <path d="M1160 38a52 52 0 1 0 40 86 44 44 0 0 1-40-86Z" fill="#FFE7A8" />
+        </g>
+        <text class="zzz z1" x="1210" y="70">z</text>
+        <text class="zzz z2" x="1232" y="48">z</text>
+        <text class="zzz z3" x="1256" y="24">Z</text>
+        <path d="M0 260 C 240 190 420 230 640 250 S 1080 190 1440 240 V360 H0 Z" fill="#22336E" />
+        <path d="M0 300 C 300 250 520 290 760 300 S 1200 260 1440 290 V360 H0 Z" fill="#2B3F80" />
+        <g transform="translate(330 168)">
+          <rect x="0" y="60" width="150" height="100" rx="10" fill="#FFF0D9" />
+          <path d="M-18 66 L75 0 L168 66 Z" fill="#FF6B16" />
+          <rect x="105" y="10" width="20" height="36" fill="#E85D10" />
+          <rect class="window" x="22" y="86" width="40" height="36" rx="6" />
+          <path d="M42 86v36M22 104h40" stroke="#E8A45A" stroke-width="3" />
+          <rect x="90" y="96" width="34" height="64" rx="8" fill="#B5652B" />
+          <circle cx="116" cy="130" r="3" fill="#FFE7A8" />
+        </g>
+        <g fill="#1A2A5E">
+          <circle cx="620" cy="250" r="34" /><rect x="615" y="250" width="10" height="40" />
+          <circle cx="680" cy="262" r="24" /><rect x="676" y="262" width="8" height="30" />
+        </g>
+      </svg>
+      <div class="footer__inner">
+        <p class="goodnight">Goodnight! <span aria-hidden="true">🌙</span></p>
+        <p class="footer__tag">Sweet dreams from everyone at Tuck &amp; Tales.</p>
+        <nav class="footer__links" aria-label="Footer">
+          <a href="https://play.google.com/store/apps/details?id=com.tuckandtales.app" target="_blank" rel="noopener">Google Play</a>
+          <a href="./privacy-policy.html">Privacy policy</a>
+          <a href="mailto:heyitswajeeha@gmail.com">Say hello</a>
+        </nav>
+        <p class="footer__copy">© <span id="year"></span> Tuck &amp; Tales</p>
+      </div>
+    </footer>
+
+    <!-- Mascot: Ollie the sleepy owl in pyjamas -->
+    <button class="owl" id="owl" type="button" aria-label="Ollie the owl says hello">
+      <span class="owl__bubble" id="owl-bubble">Hoo-hoo! Story time?</span>
+      <svg viewBox="0 0 120 140" aria-hidden="true">
+        <g class="owl__wing owl__wing--left"><ellipse cx="22" cy="92" rx="14" ry="26" fill="#C9692A" /></g>
+        <g class="owl__wing owl__wing--right"><ellipse cx="98" cy="92" rx="14" ry="26" fill="#C9692A" /></g>
+        <ellipse cx="60" cy="88" rx="40" ry="46" fill="#E9883E" />
+        <ellipse cx="60" cy="100" rx="28" ry="30" fill="#9CC9F5" />
+        <path d="M34 92h52M34 104h52M36 116h48" stroke="#FFF8EE" stroke-width="4" stroke-linecap="round" opacity=".85" />
+        <circle cx="60" cy="92" r="2.4" fill="#FFF8EE" /><circle cx="60" cy="106" r="2.4" fill="#FFF8EE" />
+        <circle cx="43" cy="62" r="15" fill="#FFF8EE" /><circle cx="77" cy="62" r="15" fill="#FFF8EE" />
+        <g class="owl__eyes">
+          <circle cx="45" cy="63" r="7" fill="#172454" /><circle cx="79" cy="63" r="7" fill="#172454" />
+          <circle cx="47" cy="60" r="2.4" fill="#fff" /><circle cx="81" cy="60" r="2.4" fill="#fff" />
+        </g>
+        <g class="owl__lids" stroke="#172454" stroke-width="3" stroke-linecap="round" fill="none">
+          <path d="M36 64q7 5 14 0" /><path d="M70 64q7 5 14 0" />
+        </g>
+        <path class="owl__beak" d="M55 72 L65 72 L60 80 Z" fill="#FF9D19" />
+        <ellipse class="owl__yawn" cx="60" cy="80" rx="6" ry="8" fill="#7A2E1A" />
+        <circle cx="33" cy="76" r="4" fill="#FF8E8E" opacity=".6" /><circle cx="87" cy="76" r="4" fill="#FF8E8E" opacity=".6" />
+        <path d="M24 46 C 34 4 82 0 96 40 C 80 34 44 34 24 46 Z" fill="#5B7BE0" />
+        <path d="M30 44 C 46 38 76 36 94 40" stroke="#FFF8EE" stroke-width="5" stroke-linecap="round" fill="none" />
+        <path d="M86 18 C 98 18 108 30 108 40" stroke="#5B7BE0" stroke-width="9" stroke-linecap="round" fill="none" />
+        <circle cx="108" cy="44" r="7" fill="#FFF8EE" />
+      </svg>
+    </button>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
